@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home -> replaceFragment(Home())
-                R.id.profile -> replaceFragment(Profile())
+                R.id.start -> replaceFragment(Start())
                 R.id.settings -> replaceFragment(Settings())
 
                 else ->{}
@@ -32,8 +32,5 @@ class MainActivity : AppCompatActivity() {
        val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame_layout,fragment)
         fragmentTransaction.commit()
-
-
-
     }
 }
