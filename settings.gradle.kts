@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Egolifting"
 include(":app")
+ 
