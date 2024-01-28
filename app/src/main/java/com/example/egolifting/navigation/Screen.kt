@@ -12,11 +12,12 @@ sealed class Screen(val route: String, val icon: ImageVector, val title: String)
     data object History : Screen("history", Icons.Filled.DateRange, "History")
     data object Workout : Screen("workout", Icons.Filled.Add, "Workout")
     data object Exercises : Screen("exercises", Icons.Filled.Call, "Exercises")
+    data object ModifyExercises : Screen("modifyexercises", Icons.Filled.Call, "ModifyExercises")
 }
 
-val items = listOf(
+val navBarItems = listOf(
     Screen.Profile,
     Screen.History,
     Screen.Workout,
-    Screen.Exercises
+    Screen.Exercises,
 )

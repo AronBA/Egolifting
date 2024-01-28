@@ -20,13 +20,16 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.egolifting.navigation.items
-import com.example.egolifting.screens.Exercises
+import com.example.egolifting.navigation.navBarItems
+import com.example.egolifting.screens.exercise.Exercises
 import com.example.egolifting.screens.History
 import com.example.egolifting.screens.Profile
 import com.example.egolifting.screens.Workout
+import com.example.egolifting.screens.exercise.modify.ModifyExercise
 import com.example.egolifting.ui.theme.EgoliftingTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +38,7 @@ class MainActivity : ComponentActivity() {
             EgoliftingTheme {
                 val navController = rememberNavController()
                 var currentPageIndex by rememberSaveable {
-                    mutableIntStateOf(1)
+                    mutableIntStateOf(2)
                 }
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -44,7 +47,7 @@ class MainActivity : ComponentActivity() {
                     Scaffold (
                         bottomBar = {
                             NavigationBar {
-                                items.forEachIndexed { index, item ->
+                                navBarItems.forEachIndexed { index, item ->
                                     NavigationBarItem(
                                         selected = currentPageIndex == index,
                                         onClick = {
@@ -60,13 +63,14 @@ class MainActivity : ComponentActivity() {
                         content = {padding ->
                             NavHost(
                                 navController = navController,
-                                startDestination = items[currentPageIndex].route,
+                                startDestination = navBarItems[currentPageIndex].route,
                                 modifier = Modifier.padding(padding)
                             ) {
                                 composable("profile") { Profile() }
                                 composable("history") { History() }
                                 composable("workout") { Workout() }
-                                composable("exercises") { Exercises() }
+                                composable("exercises") { Exercises(navController = navController) }
+                                composable("modifyexercises") { ModifyExercise(navController = navController) }
                             }
                         }
                     )
